@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.3.1</version>
+		<!-- lookup parent from repository -->
+		<relativePath/>
+	</parent>
+
+	<groupId>com.richmondnational</groupId>
+	<artifactId>apptest</artifactId>
+	<version>0.0.1</version>
+	<name>apptest-api</name>
+	<description>App Test</description>
+
+	<properties>
+		<mainClass>com.richmondnational.apptest.AppTestApiApplication</mainClass>
+
+		<!-- region - Versions - -->
+		<java.version>21</java.version>
+
+		<aws.sdk.dynamodb.version>2.29.6</aws.sdk.dynamodb.version>
+		<aws.sdk.secretmanager.version>2.29.17</aws.sdk.secretmanager.version>
+		<apache.commons.version>3.14.0</apache.commons.version>
+		<apache.commons.collections4.version>4.4</apache.commons.collections4.version>
+		<apache.commons.compress.version>1.26.1</apache.commons.compress.version>
+		<apache.poi.version>5.2.2</apache.poi.version>
+		<apache.poi.ooxml.schemas.version>4.1.2</apache.poi.ooxml.schemas.version>
+		<google.gson.version>2.10.1</google.gson.version>
+		<google.gson.java-extension.version>1.1.1</google.gson.java-extension.version>
+		<jackson.version>2.15.4</jackson.version>
+		<json.version>20240303</json.version>
+		<jwt.api.version>0.12.6</jwt.api.version>
+		<logstash.logback.encorder.version>7.4</logstash.logback.encorder.version>
+		<lombok.version>1.18.32</lombok.version>
+		<mariadb.java.version>3.3.3</mariadb.java.version>
+		<maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+		<maven.failsafe.version>3.2.5</maven.failsafe.version>
+		<maven.jacoco.plugin.version>0.8.12</maven.jacoco.plugin.version>
+		<maven.jar.plugin.version>3.2.0</maven.jar.plugin.version>
+		<maven.surefire.version>3.2.5</maven.surefire.version>
+		<mysql.connector.version>8.4.0</mysql.connector.version>
+		<spring.data.version>3.3.5</spring.data.version>
+		<spring.data.dynamodb.version>5.1.0</spring.data.dynamodb.version>
+		<springboot.maven.plugin.version>3.2.3</springboot.maven.plugin.version>
+		<springdoc.version>2.0.3</springdoc.version>
+		<xhtml.renderer.version>9.7.2</xhtml.renderer.version>
+		<!-- endregion - Versions - -->
+	</properties>
+
+	<dependencies>
+		<!-- region - Spring - -->
+		<!-- region - SpringBoot Starter - -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-json</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<!-- endregion - SpringBoot Starter - -->
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-oauth2-resource-server</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-oauth2-jose</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-commons</artifactId>
+			<version>${spring.data.version}</version>
+		</dependency>
+		<!-- endregion - Spring - -->
+
+		<!-- region - OpenAPI - -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>${springdoc.version}</version>
+		</dependency>
+		<!-- endregion - OpenAPI - -->
+
+		<!-- region - Lombok - -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- endregion - Lombok - -->
+
+		<!-- region - Apache - -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${apache.commons.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+			<version>${apache.commons.collections4.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-compress</artifactId>
+			<version>${apache.commons.compress.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>${apache.poi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>${apache.poi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml-schemas</artifactId>
+			<version>${apache.poi.ooxml.schemas.version}</version>
+		</dependency>
+		<!-- endregion - Apache - -->
+
+		<!-- region - Google - -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>${google.gson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fatboyindustrial.gson-javatime-serialisers</groupId>
+			<artifactId>gson-javatime-serialisers</artifactId>
+			<version>${google.gson.java-extension.version}</version>
+		</dependency>
+		<!-- endregion - Google - -->
+
+		<!-- region - Json - -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>${json.version}</version>
+		</dependency>
+
+		<!-- endregion - Json - -->
+
+		<!-- region - Jackson - -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.fasterxml.jackson.core</groupId>
+					<artifactId>jackson-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.fasterxml.jackson.core</groupId>
+					<artifactId>jackson-annotations</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<!-- endregion - Jackson - -->
+
+		<!-- region - Database - -->
+		<dependency>
+			<groupId>org.mariadb.jdbc</groupId>
+			<artifactId>mariadb-java-client</artifactId>
+			<version>${mariadb.java.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+			<version>${mysql.connector.version}</version>
+		</dependency>
+		<!-- endregion - Database - -->
+
+		<!--  region - Logstash -  -->
+		<dependency>
+			<groupId>net.logstash.logback</groupId>
+			<artifactId>logstash-logback-encoder</artifactId>
+			<version>${logstash.logback.encorder.version}</version>
+		</dependency>
+		<!--  endregion - Logstash -  -->
+
+		<!-- region - PDF - -->
+		<dependency>
+			<groupId>org.xhtmlrenderer</groupId>
+			<artifactId>flying-saucer-pdf</artifactId>
+			<version>${xhtml.renderer.version}</version>
+		</dependency>
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>html2pdf</artifactId>
+            <version>5.0.5</version>
+        </dependency>
+		<!-- endregion - PDF - -->
+
+		<!-- region - AWS - -->
+		<dependency>
+			<groupId>software.amazon.awssdk</groupId>
+			<artifactId>secretsmanager</artifactId>
+			<version>${aws.sdk.secretmanager.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>software.amazon.awssdk</groupId>
+			<artifactId>dynamodb</artifactId>
+			<version>${aws.sdk.dynamodb.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.fasterxml.jackson.core</groupId>
+					<artifactId>jackson-core</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.github.derjust</groupId>
+			<artifactId>spring-data-dynamodb</artifactId>
+			<version>${spring.data.dynamodb.version}</version>
+		</dependency>
+		<!-- endregion - AWS - -->
+	</dependencies>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.jacoco</groupId>
+					<artifactId>jacoco-maven-plugin</artifactId>
+					<version>${maven.jacoco.plugin.version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${springboot.maven.plugin.version}</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven.surefire.version}</version>
+				<configuration>
+					<argLine>@{argLine} -XX:+EnableDynamicAgentLoading</argLine>
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>${maven.failsafe.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<configuration>
+					<append>true</append>
+					<excludes>
+						<exclude>**/src/test/**</exclude>
+						<exclude>**/exception/**</exclude>
+						<exclude>**/model/**</exclude>
+						<exclude>**/repository/**</exclude>
+						<exclude>**/util/**</exclude>
+						<exclude>**/config/**</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<id>jacoco-initialize</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+						<configuration>
+							<destFile>${project.build.directory}/jacoco.exec</destFile>
+						</configuration>
+					</execution>
+					<execution>
+						<id>jacoco-report</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<repositories>
+		<repository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
+</project>

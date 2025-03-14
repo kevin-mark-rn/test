@@ -1,0 +1,26 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ReadonlyAccess",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": [
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:BatchGetImage",
+        "ecr:DescribeImageScanFindings",
+        "ecr:DescribeImages",
+        "ecr:DescribeRepositories",
+        "ecr:GetAuthorizationToken",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:GetRepositoryPolicy",
+        "ecr:ListImages"
+      ],
+      "Condition": {
+        "StringLike": {
+          "aws:PrincipalOrgID": "o-mvl62tej2k"
+        }
+      }
+    }
+  ]
+}

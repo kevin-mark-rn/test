@@ -1,0 +1,16 @@
+name: Copy files to S3 Manual Prod
+
+on:
+  workflow_dispatch:
+
+jobs:
+  copy-s3-configs-prod:
+    permissions:
+      contents: write
+      id-token: write
+    uses: RichmondNational/GithubActions/.github/workflows/copy-file-s3.yml@master
+    with:
+      target-s3-bucket: "rn-prod-us-east-1-lambda-deployment-code"
+      target-s3-path: "ClaimAPI"
+      aws-role: "arn:aws:iam::218527194748:role/rn-cicd-github-actions-role"
+      aws-region: "us-east-1"

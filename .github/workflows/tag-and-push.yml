@@ -1,0 +1,41 @@
+name: Tag and Push
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      [ "master", "hotfix*" ]
+
+jobs:
+#  tag-and-push-artifact:
+#    uses: RichmondNational/GithubActions/.github/workflows/tag-and-push-v8.yml@master
+#    with:
+#      ecr-registry: "218527194748.dkr.ecr.us-east-1.amazonaws.com"
+#      ecr-repository: "rn-claims/rn-claims-api"
+#      aws-role: "arn:aws:iam::218527194748:role/rn-cicd-github-actions-role"
+#      policy-file: "ecrpolicy.json"
+
+  copy-s3-configs-uat:
+    permissions:
+      contents: write
+      id-token: write
+    uses: RichmondNational/GithubActions/.github/workflows/copy-file-s3.yml@master
+    with:
+      target-s3-bucket: "rn-uat-us-east-1-lambda-deployment-code"
+      target-s3-path: "AppTest"
+      aws-role: "arn:aws:iam::730319738296:role/rn-uat-github-actions-role"
+      aws-region: "us-east-1"
+
+#  copy-tag-gitops-deploy-uat:
+#    uses: RichmondNational/GithubActions/.github/workflows/copy-tag-deploy-gitops.yml@master
+#    needs: tag-and-push-artifact
+#    with:
+#      repository: RichmondNational/rn-claims-gitops
+#      environment: uat
+#      environments-json: environments.json
+#      app: rn-claims-api
+#      new-tag: ${{ needs.tag-and-push-artifact.outputs.new-tag }}
+#      changes-since: ${{ needs.tag-and-push-artifact.outputs.changes-since }}
+#    secrets:
+#      github-token: ${{ secrets.GITOPS_PERSONAL_TOKEN }}

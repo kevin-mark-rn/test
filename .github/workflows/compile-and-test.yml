@@ -1,0 +1,58 @@
+name: Compile and Test
+
+on:
+  pull_request:
+    branches:
+      [ "master", "hotfix*" ]
+
+jobs:
+  compile-and-test:
+    permissions:
+      pull-requests: write
+      contents: read
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'corretto'
+          cache: maven
+
+      - name: Build and Test
+        run: mvn -B verify --file pom.xml
+
+      - name: Update coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-report
+          path: |
+            ${{ github.workspace }}/target/site/jacoco/jacoco.xml
+            ${{ github.workspace }}/target/site/jacoco/index.html
+
+      - name: Add coverage to PR
+        id: jacoco
+        uses: madrapps/jacoco-report@v1.6.1
+        with:
+          paths: ${{ github.workspace }}/target/site/jacoco/jacoco.xml
+          token: ${{ secrets.GITHUB_TOKEN }}
+          min-coverage-overall: 0
+          min-coverage-changed-files: 0
+          title: ':recycle: Coverage Report'
+          update-comment: true
+          pass-emoji: ':white_check_mark:'
+          fail-emoji: ':x:'
+
+      - name: Docker build
+        uses: RichmondNational/GithubActions/.github/actions/build-and-save-docker-image@master
+
+      - name: Update PR with comment
+        if: success()
+        run: gh pr comment ${{ github.event.number }} -b "Compiled and tests successful"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
