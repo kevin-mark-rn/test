@@ -12,7 +12,7 @@ jobs:
 #    uses: RichmondNational/GithubActions/.github/workflows/tag-and-push-v8.yml@master
 #    with:
 #      ecr-registry: "218527194748.dkr.ecr.us-east-1.amazonaws.com"
-#      ecr-repository: "rn-claims/rn-claims-api"
+#      ecr-repository: "rn-apptest/rn-apptest-api"
 #      aws-role: "arn:aws:iam::218527194748:role/rn-cicd-github-actions-role"
 #      policy-file: "ecrpolicy.json"
 
@@ -31,10 +31,10 @@ jobs:
 #    uses: RichmondNational/GithubActions/.github/workflows/copy-tag-deploy-gitops.yml@master
 #    needs: tag-and-push-artifact
 #    with:
-#      repository: RichmondNational/rn-claims-gitops
+#      repository: RichmondNational/rn-apptest-gitops
 #      environment: uat
 #      environments-json: environments.json
-#      app: rn-claims-api
+#      app: rn-apptest-api
 #      new-tag: ${{ needs.tag-and-push-artifact.outputs.new-tag }}
 #      changes-since: ${{ needs.tag-and-push-artifact.outputs.changes-since }}
 #    secrets:
